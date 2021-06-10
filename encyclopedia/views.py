@@ -47,7 +47,9 @@ def create(request):
         print(title, content)
         if util.get_entry(title):
             return render(request, "encyclopedia/error.html",{
-            "title": title
+            "title": title,
+            "exist": True
+
         })
         else:
             util.save_entry(title, content)
@@ -66,13 +68,23 @@ def index(request):
         values = request.POST
         value = values['q']
         print(value)
+        if util.get_entry(value):
+            str = "/wiki/"
+            str = str + value
+            return HttpResponseRedirect(str)
+        entries = []
         for key, v in res.items():
             print(key, v)
             if value.lower() in v:
                 print("came here")
-                str = "/wiki/"
-                str = str + key
-                return HttpResponseRedirect(str)
+                entries.append(key)
+        return render(request, "encyclopedia/index.html", {
+            "entries": entries,
+            "searched": True
+            })
+                # str = "/wiki/"
+                # str = str + key
+                # return HttpResponseRedirect(str)
     return render(request, "encyclopedia/index.html", {
         "entries": util.list_entries()
     })

@@ -5,6 +5,11 @@
 {% endblock %}
 
 {% block body %}
+    {% if exist%}
+    <h1>The page with title {{ title }} already exist</h1>
+    {% else %}
     <h1>The requested page {{ title }} Not Found!</h1>
+    {% endif %}
+    
 
 {% endblock %}
