@@ -1,0 +1,27 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    Create New Page
+{% endblock %}
+
+{% block body %}
+    <h1>Create New Page</h1>
+    <form action="{% url 'create' %}" method="POST, GET">
+        {% csrf_token %}
+        {{form}}
+        <div style="margin: auto; width: 50%; padding: 10px;">
+        <label>Give your title:</label>
+        <input type="text" name="title">
+        </div>
+        <br>
+        <h6>Read through <a href="https://docs.github.com/en/github/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax">GitHub’s Markdown guide</a> to get an understanding for how Markdown’s syntax works. Pay attention in particular to what Markdown syntax looks like for headings, bold text, links, and lists.</h6>
+        <br>
+        <label>Create a new page:</label>
+        <textarea id="create" name="content" rows="5" cols="50"></textarea>
+        <br>
+        <br>
+        <div style="margin: auto; width: 10%; padding: 10px;">
+        <input type="submit" value="Submit">
+        </div>
+    </form>
+{% endblock %}
